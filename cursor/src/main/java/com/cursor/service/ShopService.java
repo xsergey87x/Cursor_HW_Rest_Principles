@@ -32,27 +32,27 @@ public class ShopService {
     }
 
     public Shop getShopById(int id) {
-        int position = getPositionShopById(id);
-        if (position != -1) return shopCollection.get(position);
+        int index = getPositionShopById(id);
+        if (index != -1) return shopCollection.get(index);
         else return null;
     }
 
     public Shop editShop(int id, Shop newShop) {
-        int position = getPositionShopById(id);
+        int index = getPositionShopById(id);
         Shop resultShop = new Shop(id, newShop.getCity(), newShop.getStreet(), newShop.getShopName(), newShop.getAmountWorkers(), newShop.isExistSite());
-        shopCollection.set(position, resultShop);
+        shopCollection.set(index, resultShop);
         return resultShop;
     }
 
     private int getPositionShopById(int id) {
-        int positionShop = -1;
+        int indexShop = -1;
         for (int i = 0; i < shopCollection.size(); i++) {
             if (shopCollection.get(i).getId() == id) {
-                positionShop = i;
+                indexShop = i;
                 break;
             }
         }
-        return positionShop;
+        return indexShop;
     }
 
 }

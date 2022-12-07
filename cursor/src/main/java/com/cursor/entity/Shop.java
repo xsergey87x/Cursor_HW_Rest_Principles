@@ -6,6 +6,14 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Shop {
+
+    int id;
+    String city;
+    String street;
+    String shopName;
+    int amountWorkers;
+    boolean existSite;
+
     public Shop() {
     }
 
@@ -16,13 +24,6 @@ public class Shop {
         this.amountWorkers = amountWorkers;
         this.existSite = existSite;
     }
-
-    int id;
-    String city;
-    String street;
-    String shopName;
-    int amountWorkers;
-    boolean existSite;
 
     public Shop(int id, String city, String street, String shopName, int amountWorkers, boolean existSite) {
         this.id = id;

@@ -2,17 +2,13 @@ package com.cursor.rest;
 
 import com.cursor.entity.Shop;
 import com.cursor.service.ShopService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.*;
-import java.util.ArrayList;
-
 @RestController
+@RequestMapping(value = "/shops")
 public class ShopController {
 
-    @Autowired
     private ShopService shopService;
 
     public ShopController(ShopService shopService) {
@@ -29,19 +25,19 @@ public class ShopController {
     }
 
     @GetMapping("/deleteShop/{shopId}")
-    public String deleteShopById(@PathVariable int shopId) {
+    public ResponseEntity deleteShopById(@PathVariable int shopId) {
         shopService.deleteShop(shopId);
-        return "Shop was deleted";
+        return new ResponseEntity<>("Shop was deleted", HttpStatus.OK);
     }
 
     @GetMapping("/allShops")
-    public ArrayList<Shop> getAllShop() {
-        return shopService.getAllShop();
+    public ResponseEntity getAllShop() {
+        return new ResponseEntity<>(shopService.getAllShop(), HttpStatus.FOUND);
     }
 
     @PostMapping(value = "/modifyShop/{shopId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Shop modifyShop(@PathVariable int shopId, @RequestBody Shop shop) {
-        return shopService.editShop(shopId, shop);
+    public ResponseEntity modifyShop(@PathVariable int shopId, @RequestBody Shop shop) {
+        return new ResponseEntity<>(shopService.editShop(shopId, shop), HttpStatus.ACCEPTED);
     }
 
     @PostMapping(value = "/addShop", produces = MediaType.APPLICATION_JSON_VALUE)
